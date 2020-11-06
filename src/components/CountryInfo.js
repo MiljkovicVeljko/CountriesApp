@@ -1,22 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Strong = styled.strong`
-  color: firebrick;
-`;
-
-const Info = styled.div`
-  /* padding: 0 3rem; */
-  font-size: 12px;
-  margin: 3rem 1.5rem;
-  text-align: left;
-`;
-
-const CountryInfo = ({ capital, subregion, population }) => (
+import { Info, Strong, Right } from '../shared/utils/styled';
+const CountryInfo = ({ capital, subregion, population, borders }) => (
   <Info>
-      <p><Strong>Capital:</Strong> {capital}</p>
-      <p><Strong>Subregion:</Strong> {subregion}</p>
-      <p><Strong>Population:</Strong> {population}</p>
+      <div>
+        <p><Strong>Capital:</Strong> {capital}</p>
+        <p><Strong>Subregion:</Strong> {subregion}</p>
+        <p><Strong>Population:</Strong> {population}</p>
+      </div>
+      <Right>
+        <h3>Neighbors</h3>
+        {borders && borders.map(neighbor => <p key={neighbor}>{neighbor}</p>)}
+      </Right>
   </Info>
 )
 
