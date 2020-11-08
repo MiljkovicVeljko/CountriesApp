@@ -10,6 +10,9 @@ export const Wrapper = styled.div`
     padding: 10px;
     margin: 10px;
     text-align: center;
+    @media (max-width: 320px) {
+        width: 80vw;
+    }
 `;
 
 export const Details = styled(Wrapper)`
@@ -17,6 +20,20 @@ export const Details = styled(Wrapper)`
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    @media (max-width: 320px) {
+        width: fit-content;
+        position: static;
+        left: none;
+        transform: none;
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        button {
+            margin-bottom: 1rem;
+        }
+    }
 `;
 
 export const Img = styled.img`
@@ -24,6 +41,10 @@ export const Img = styled.img`
     height: 150px;
     border: 3px solid ${({ theme }) => theme.text};
     border-radius: 50%;
+    @media (max-width: 768px) {
+        width: 75px;
+        height: 75px;
+    }
 `;
 
 export const Strong = styled.span`
@@ -37,6 +58,12 @@ export const Info = styled.div`
     text-align: left;
     display: flex;
     justify-content: space-between;
+    @media (min-width: 320px) {
+        font-size: 12px;
+    }
+    @media (min-width: 768px) {
+        font-size: 18px;
+    }
 `;
 
 export const Right = styled.div`
@@ -53,6 +80,9 @@ export const Btn = styled.button`
     font-size: 16px;
     cursor: pointer;
     outline: none;
+    @media (max-width: 320px) {
+        font-size: 12px;
+    }
 `;
 
 export const List = styled.div`
@@ -70,6 +100,13 @@ export const Controller = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    @media (max-width: 320px) {
+        flex-direction: column;
+        form {
+            display: flex;
+            align-items: center;    
+        }
+    }
 `;
 
 export const Input = styled.input`
@@ -82,6 +119,10 @@ export const Input = styled.input`
     outline: none;
     font-size: 20px;
     color: ${({ theme }) => theme.text};
+    @media (max-width: 320px) {
+        font-size: 12px;
+        margin-bottom: 1rem;
+    }
 `;
 
 export const Submit = styled(Input)`
@@ -97,14 +138,24 @@ export const Regions = styled.ul`
     list-style: none;
     margin-top: 0;
     color: whitesmoke;
-    padding: 1rem 0;
+    padding-top: 1rem;
+    @media (max-width: 320px) {
+        padding: 0;
+    }
 `;
 
 export const Pagination = styled(Regions)`
+    padding-left: 0;
+    @media (max-width: 320px) {
+        display: none;
+    }
     ul {
         list-style: none;
         display: flex;
+        justify-content: center;
         padding: 0;
+        width: 100%;
+        padding-bottom: 1rem;
         li {
             margin: 0 1rem;
         }
@@ -115,19 +166,34 @@ export const Title = styled.h3`
     width: 100%;
     text-align: center;
     margin-top: 0;
+    font-size: 2rem;
+    @media (max-width: 768px) {
+        margin-top: 1rem;
+        font-size: 20px;
+    }
 `;
 
 export const Filter = styled.li`
     font-size: 20px;
     color: #fff;
-    margin: 0 1rem;
+    margin: 1rem;
     border: 2px solid #fff;
     border-radius: 10px;
     padding: 0 10px;
+    @media (max-width: 320px) {
+        font-size: 14px;
+    }
 `;
 
 export const Neighbour = styled.p`
     color: ${({ theme }) => theme.text};
     cursor: pointer;
+`;
+
+export const NavBtn = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 `;
 

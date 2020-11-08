@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { getMode } from '../shared/helpers/helpers';
-import { Img, Details, Btn } from '../styled/styled';
+import { Img, Details, Btn, Title, NavBtn } from '../styled/styled';
 import CountryInfo from '../components/CountryInfo';
 
 const CountryDetails = ({ countries, toggleTheme, theme }) => {
@@ -28,11 +28,13 @@ const CountryDetails = ({ countries, toggleTheme, theme }) => {
     return (showCountry ? 
             <Details key={country.alpha3Code}>
                 <Img src={country.flag} alt="Country flag"/>
-                <h3>{country.name}</h3>
+                <Title>{country.name}</Title>
                 <CountryInfo capital={country.capital} subregion={country.subregion} population={country.population} borders={country.borders} />
-                <Btn onClick={handleBackToAll}>Back to all</Btn>
-                <Btn onClick={handleBack}>Back</Btn>
-                <Btn onClick={toggleTheme}>{displayMode}</Btn>
+                <NavBtn>
+                    <Btn onClick={handleBackToAll}>Back to all</Btn>
+                    <Btn onClick={handleBack}>Back</Btn>
+                    <Btn onClick={toggleTheme}>{displayMode}</Btn>
+                </NavBtn>
             </Details> : <p>loading...</p>
     );
 }
