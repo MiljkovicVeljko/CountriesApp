@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import Country from '../components/Country';
-import { List, Controls, Input, Submit } from '../shared/utils/styled';
+import { 
+    List, 
+    Controls, 
+    Input, 
+    Submit, 
+    Regions, 
+    Filter, 
+    Title, 
+    Btn} from '../styled/styled';
+import { REGIONS } from '../shared/constants/regions.constants';
 
-export const Countries = ({ countries, handleSearch }) => {
+export const Countries = ({ countries, handleSearchName, handleFilter, toggleTheme }) => {
     const [form, setForm] = useState("");
 
     const onChange = e => setForm(e.target.value);
     
     const onSubmit = e => {
         e.preventDefault();
-        handleSearch(form);
+        handleSearchName(form);
     }
 
+    
     let showContries = null;
     
     if(countries !== []) {
@@ -23,11 +33,15 @@ export const Countries = ({ countries, handleSearch }) => {
             <Controls>
                 <form onSubmit={(e) => onSubmit(e)}>
                     <Input type="text" onChange={onChange} value={form} placeholder="search countries by name" />
-                    {/* <Input type="text" placeholder="search countries by region" /> */}
                     <Submit type="submit" value="Search" />
                 </form>
+                <Btn onClick={toggleTheme}>Toggle mode</Btn>
             </Controls>
-
+            <Regions>
+                <Title>Filter by Region</Title>
+                <Filter onClick={() => handleFilter("all")}>All</Filter>
+                {REGIONS.map(region => <Filter key={region} onClick={() => handleFilter(region)}>{region}</Filter>)}
+            </Regions>
             {showContries}
         </List>
     )

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Img, Wrapper } from '../shared/utils/styled';
+import { Img, Wrapper, Btn } from '../styled/styled';
 
 const Country = ({ country }) => {
-  const { name, capital, flag, subregion, population } = country;
+  const { name, flag, } = country;
 
   let history = useHistory();
 
@@ -15,7 +15,7 @@ const Country = ({ country }) => {
     <Wrapper key={name} >
         <Img src={flag} alt="Country flag"/>
         <h3>{name}</h3>
-        <button onClick={onClick}>See more details</button>
+        <Btn onClick={onClick}>See more details</Btn>
     </Wrapper>
     );
 }
