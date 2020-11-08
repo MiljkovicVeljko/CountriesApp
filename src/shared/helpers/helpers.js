@@ -1,0 +1,1 @@
+export const getMode = (theme) => theme === 'light' ? 'dark mode' : 'light mode';

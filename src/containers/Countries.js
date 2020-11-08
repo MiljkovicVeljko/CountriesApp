@@ -1,48 +1,48 @@
 import React, { useState } from 'react';
 import Country from '../components/Country';
-import { 
-    List, 
-    Controls, 
-    Input, 
-    Submit, 
-    Regions, 
-    Filter, 
-    Title, 
-    Btn} from '../styled/styled';
-import { REGIONS } from '../shared/constants/regions.constants';
+import Controls from '../components/Controls';
+import { List, Pagination } from '../styled/styled';
+import FilterNav from '../components/FilterNav';
+import ReactPaginate from 'react-paginate';
 
-export const Countries = ({ countries, handleSearchName, handleFilter, toggleTheme }) => {
-    const [form, setForm] = useState("");
+export const Countries = ({ countries, handleSearchName, handleFilter, toggleTheme, theme }) => {
+    const [currentPage, setCurrentPage] = useState(0);
+    const PER_PAGE = 10;
+    let pageCount = null;
+    let showContries = null;
+    let showedContries = null;
 
-    const onChange = e => setForm(e.target.value);
-    
-    const onSubmit = e => {
-        e.preventDefault();
-        handleSearchName(form);
+    if(countries !== []) {
+        const offset = currentPage * PER_PAGE;
+        const getCountries = [...countries];
+        pageCount = Math.ceil(getCountries.length / PER_PAGE);
+        showedContries = getCountries
+          .slice(offset, offset + PER_PAGE)
+          .map(country => <Country key={country.name} country={country} />);
+        showContries = countries.map(country => <Country key={country.name} country={country} />);
     }
 
-    
-    let showContries = null;
-    
-    if(countries !== []) {
-        showContries = countries.map(country => <Country key={country.name} country={country} />)
+    const handlePageClick = ({ selected: selectedPage }) => {
+        setCurrentPage(selectedPage)
     }
 
     return (
         <List>
-            <Controls>
-                <form onSubmit={(e) => onSubmit(e)}>
-                    <Input type="text" onChange={onChange} value={form} placeholder="search countries by name" />
-                    <Submit type="submit" value="Search" />
-                </form>
-                <Btn onClick={toggleTheme}>Toggle mode</Btn>
-            </Controls>
-            <Regions>
-                <Title>Filter by Region</Title>
-                <Filter onClick={() => handleFilter("all")}>All</Filter>
-                {REGIONS.map(region => <Filter key={region} onClick={() => handleFilter(region)}>{region}</Filter>)}
-            </Regions>
-            {showContries}
+            <Controls toggleTheme={toggleTheme} handleSearchName={handleSearchName} theme={theme} />
+            <FilterNav handleFilter={handleFilter} />
+            {showedContries}
+            <Pagination>
+                <ReactPaginate
+                    previousLabel={'previous'}
+                    nextLabel={'next'}
+                    breakLabel={'...'}
+                    breakClassName={'break-me'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={1}
+                    pageRangeDisplayed={2}
+                    onPageChange={handlePageClick}
+                />
+            </Pagination>
         </List>
     )
 }

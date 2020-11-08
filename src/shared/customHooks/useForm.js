@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
 const useForm = submitCallback => {
-    const [state, setState] = useState({});
+    const [state, setState] = useState();
 
     const handleSubmit = e => {
         e.preventDefault();
-        submitCallback();
+        submitCallback(state);
     }
 
     const handleChange = e => {
         e.persist();
-        setState(state => ({...state, [e.target.name]: e.target.value}));
+        setState(e.target.value);
     }
 
     return [state, handleChange, handleSubmit];

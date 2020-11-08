@@ -7,6 +7,10 @@ html, body {
     padding: 0;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {	
     font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialiased;

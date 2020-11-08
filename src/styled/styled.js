@@ -62,16 +62,18 @@ export const List = styled.div`
     flex-wrap: wrap;
 `;
 
-export const Controls = styled.div`
+export const Controller = styled.div`
     width: 100%;
     background: ${({ theme }) => theme.primary};
     padding: 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 `;
 
 export const Input = styled.input`
-    width: 300px;
+    width: 300;
     padding: .5rem;
     border: 2px solid ${({ theme }) => theme.text};
     background: ${({ theme }) => theme.secondary};
@@ -96,6 +98,17 @@ export const Regions = styled.ul`
     margin-top: 0;
     color: whitesmoke;
     padding: 1rem 0;
+`;
+
+export const Pagination = styled(Regions)`
+    ul {
+        list-style: none;
+        display: flex;
+        padding: 0;
+        li {
+            margin: 0 1rem;
+        }
+    }
 `;
 
 export const Title = styled.h3`
