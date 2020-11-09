@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Country from '../components/Country';
 import Controls from '../components/Controls';
 import { List, Pagination } from '../styled/styled';
 import FilterNav from '../components/FilterNav';
 import ReactPaginate from 'react-paginate';
+import { useDispatch, useSelector } from "react-redux";
+import { selectPagination, setCurrentPage, } from "../store/paginationSlice";
 
 export const Countries = ({ countries, handleSearchName, handleFilter, toggleTheme, theme }) => {
-    const [currentPage, setCurrentPage] = useState(0);
+    const currentPage = useSelector(selectPagination);
+    const dispatch = useDispatch();
     const PER_PAGE = 10;
     let pageCount = null;
     let showContries = null;
@@ -23,7 +26,7 @@ export const Countries = ({ countries, handleSearchName, handleFilter, toggleThe
     }
 
     const handlePageClick = ({ selected: selectedPage }) => {
-        setCurrentPage(selectedPage)
+        dispatch(setCurrentPage(selectedPage));
     }
 
     return (
