@@ -165,11 +165,16 @@ export const Pagination = styled(Regions)`
 export const Title = styled.h3`
     width: 100%;
     text-align: center;
-    margin-top: 0;
-    font-size: 2rem;
+    margin-top: 1rem;
+    font-size: 22px;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap; 
     @media (max-width: 768px) {
-        margin-top: 1rem;
         font-size: 20px;
+    }
+    @media (max-width: 320px) {
+        font-size: 16px;
     }
 `;
 
