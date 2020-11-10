@@ -6,20 +6,21 @@ import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from './styled/theme';
 import { useDarkMode } from './shared/customHooks/useDarkMode';
 import { Router } from './Router/Router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCountries, selectCountries } from './store/countriesSlice';
 
 const App = () => {
-  const [countries, setCountries] = useState([]);
+  const countries = useSelector(selectCountries);
+  const dispatch = useDispatch();
   const [updatedCountries, setUpdatedCountries] = useState();
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
   useEffect(() => {
-    axios(
-      `${API_BASE_URL}all`
-    ).then(response => {
-      setCountries(response.data);
-    });
+    dispatch(getCountries());
   }, []);
+
+  // console.log("rom", countries);
 
   const handleSearchName = searchName => {
     if(searchName === '') {
