@@ -10,16 +10,70 @@ export const Wrapper = styled.div`
     padding: 10px;
     margin: 10px;
     text-align: center;
+
     @media (max-width: 320px) {
         width: 80vw;
     }
 `;
+// sneaker
+export const Circle = styled.div`
+    max-height: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+    
+`;
+// circle
+export const InnerCircle = styled.div`
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.75),
+        rgba(0, 0, 0, 0.75)
+    );
+    position: absolute;
+    border-radius: 50%;
+    z-index: 1;
+    top: 5rem;
+`;
+//info
+export const InfoDetail = styled.div`
+    margin-top: 2rem;
+    transform: ${({ y, x }) => y !== 0 && x !== 0 && "translateZ(150px)"};
+    transition: ${({ y, x }) => y === 0 && x === 0 && "all 0.75s ease"};
+`;
 
+// card
 export const Details = styled(Wrapper)`
-    width: 500px;
+    width: 400px;
+    height: 600px;
+    max-height: 80vh;
+    box-shadow: 0 20px 20px rgba(0,0,0,.2), 0 0 50px rgba(0,0,0,.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transform: rotateY(${({ y }) => y}deg) rotateX(${({ x }) => x}deg);
+    transition: ${({ y, x }) => y === 0 && x === 0 && "all 0.5s ease"}
+`;
+
+// container
+export const Card = styled(Wrapper)`
+    width: 800px;
+    height: 800px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    background: transparent;
+    box-shadow: none;
+
     @media (max-width: 320px) {
         width: fit-content;
         position: static;
@@ -37,10 +91,13 @@ export const Details = styled(Wrapper)`
 `;
 
 export const Img = styled.img`
-    width: 150px;
-    height: 150px;
-    border: 3px solid ${({ theme }) => theme.text};
-    border-radius: 50%;
+    width: 100px;
+    height: 50px;
+    z-index: 2;
+    transform: ${({ y, x }) => y !== 0 && x !== 0 && "translateZ(150px)"};
+    transition: ${({ y, x }) => y === 0 && x === 0 && "all 0.75s ease"};
+    box-shadow: 0 20px 20px rgba(0,0,0,.5), 0 0 50px rgba(0,0,0,.5);
+
     @media (max-width: 768px) {
         width: 75px;
         height: 75px;
@@ -58,9 +115,11 @@ export const Info = styled.div`
     text-align: left;
     display: flex;
     justify-content: space-between;
+
     @media (min-width: 320px) {
         font-size: 12px;
     }
+
     @media (min-width: 768px) {
         font-size: 18px;
     }
@@ -80,6 +139,7 @@ export const Btn = styled.button`
     font-size: 16px;
     cursor: pointer;
     outline: none;
+
     @media (max-width: 320px) {
         font-size: 12px;
     }
@@ -100,6 +160,7 @@ export const Controller = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+
     @media (max-width: 320px) {
         flex-direction: column;
         form {
@@ -119,6 +180,7 @@ export const Input = styled.input`
     outline: none;
     font-size: 20px;
     color: ${({ theme }) => theme.text};
+
     @media (max-width: 320px) {
         font-size: 12px;
         margin-bottom: 1rem;
@@ -139,6 +201,7 @@ export const Regions = styled.ul`
     margin-top: 0;
     color: whitesmoke;
     padding-top: 1rem;
+
     @media (max-width: 320px) {
         padding: 0;
     }
@@ -146,6 +209,7 @@ export const Regions = styled.ul`
 
 export const Pagination = styled(Regions)`
     padding-left: 0;
+
     @media (max-width: 320px) {
         display: none;
     }
@@ -165,11 +229,12 @@ export const Pagination = styled(Regions)`
 export const Title = styled.h3`
     width: 100%;
     text-align: center;
-    margin-top: 1rem;
+    margin: 1rem 0;
     font-size: 22px;
     text-overflow: ellipsis;
     overflow:hidden;
-    white-space:nowrap; 
+    white-space:nowrap;
+
     @media (max-width: 768px) {
         font-size: 20px;
     }
@@ -185,6 +250,7 @@ export const Filter = styled.li`
     border: 2px solid #fff;
     border-radius: 10px;
     padding: 0 10px;
+
     @media (max-width: 320px) {
         font-size: 14px;
     }

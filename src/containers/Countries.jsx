@@ -6,23 +6,24 @@ import FilterNav from '../components/FilterNav';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from "react-redux";
 import { selectPagination, setCurrentPage, } from "../store/paginationSlice";
+import { selectCountries } from '../store/countriesSlice';
+import { selectUpdatedCountries } from '../store/operationSlice';
 
-export const Countries = ({ countries, handleSearchName, handleFilter, toggleTheme, theme }) => {
+export const Countries = ({ handleSearchName, handleFilter }) => {
+    const countries = useSelector(selectCountries);
+    const updatedCountries = useSelector(selectUpdatedCountries);
     const currentPage = useSelector(selectPagination);
     const dispatch = useDispatch();
     const PER_PAGE = 10;
     let pageCount = null;
-    let showContries = null;
-    let showedContries = null;
+    let showCountries = null;
 
-    if(countries !== []) {
+    if(countries !== [] && updatedCountries.length === 0) {
         const offset = currentPage * PER_PAGE;
-        const getCountries = [...countries];
-        pageCount = Math.ceil(getCountries.length / PER_PAGE);
-        showedContries = getCountries
+        pageCount = Math.ceil(countries.length / PER_PAGE);
+        showCountries = countries
           .slice(offset, offset + PER_PAGE)
           .map(country => <Country key={country.name} country={country} />);
-        showContries = countries.map(country => <Country key={country.name} country={country} />);
     }
 
     const handlePageClick = ({ selected: selectedPage }) => {
@@ -31,9 +32,9 @@ export const Countries = ({ countries, handleSearchName, handleFilter, toggleThe
 
     return (
         <List>
-            <Controls toggleTheme={toggleTheme} handleSearchName={handleSearchName} theme={theme} />
+            <Controls handleSearchName={handleSearchName} />
             <FilterNav handleFilter={handleFilter} />
-            {showedContries}
+            {showCountries}
             <Pagination>
                 <ReactPaginate
                     previousLabel={'previous'}

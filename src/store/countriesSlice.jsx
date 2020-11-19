@@ -14,9 +14,7 @@ export const countriesSlice = createSlice({
         loading: false,
         error: ""
     },
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: {
         [getCountries.fulfilled]: (state, action) => {
             state.loading = false;
@@ -25,5 +23,6 @@ export const countriesSlice = createSlice({
     },
 });
 
+export const { filterCountries } = countriesSlice.actions;
 export const selectCountries = state => state.countries.countries;
 export default countriesSlice.reducer;
